@@ -1,0 +1,15 @@
+# IDE ignores
+.idea/
+
+# C ignores
+out/
+genprime
+
+# -Wall compilation ignores
+genprime.dSYM/
+
+# Output ignores
+*.txt
+
+# OSX ignores
+.DS_Store
