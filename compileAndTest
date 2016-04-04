@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+
+# Sequential version of the compile and test script
+
+set -e
+
+nValue="10"
+numberOfProcesses="4"
+
+# Loads mpi-module if on CIMS
+if [[ "$OSTYPE" == "linux-gnu" ]]; then
+	module load openmpi-x86_64
+fi
+
+# Compiles
+if [[ "$OSTYPE" == "darwin15" ]]; then
+    clang-omp -fopenmp -g -Wall -o genprime genprime.c -std=c99
+else
+	gcc -fopenmp -g -Wall -o genprime genprime.c -std=c99
+fi
+
+# Executes and generates the output file
+./genprime $nValue $numberOfProcesses
+
+cat $nValue.txt
