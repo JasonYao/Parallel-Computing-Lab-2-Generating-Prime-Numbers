@@ -368,9 +368,7 @@ int initialise(int argc, char *argv[])
 int main(int argc, char *argv[])
 {
     /* Timing stuff */
-    clock_t start, end;
-    double cpu_time_used;
-    start = clock();
+    double tstart = 0.0, ttaken;
 
     if( argc != 3)
     {
@@ -380,6 +378,9 @@ int main(int argc, char *argv[])
 
     /* Read the input file and fill the global data structure above */
     int numberOfThreads = initialise(argc, argv);
+
+    /* Start of timing the middle section */
+    tstart = omp_get_wtime();
 
     printf("Number of threads: %d\n", numberOfThreads);
     /* Open MP stuff */
@@ -391,9 +392,8 @@ int main(int argc, char *argv[])
         // Timing stuff
         if (IS_TIMED_MODE)
         {
-            end = clock();
-            cpu_time_used = ((double) (end - start)) / CLOCKS_PER_SEC;
-            printf("CPU Time used was: %f\n", cpu_time_used);
+            ttaken = omp_get_wtime() - tstart;
+            printf("Time take for the main part: %f\n", ttaken);
         }
     } // End of sequential mode
     else
@@ -405,14 +405,12 @@ int main(int argc, char *argv[])
 //            /* Writing to the stdout */
 //            for(int i = 0; i < num; i++)
 //                printf("%f\n",x[i]);
-//
-//            // Timing stuff
-//            if (IS_TIMED_MODE)
-//            {
-//                end = clock();
-//                cpu_time_used = ((double) (end - start)) / CLOCKS_PER_SEC;
-//                printf("CPU Time used was: %f\n", cpu_time_used);
-//            }
+
+          if (IS_TIMED_MODE)
+          {
+              ttaken = omp_get_wtime() - tstart;
+              printf("Time take for the main part: %f\n", ttaken);
+          }
 //        }
     } // End of parallel mode
 
