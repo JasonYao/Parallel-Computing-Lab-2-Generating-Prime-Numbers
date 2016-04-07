@@ -1,25 +1,28 @@
 #!/usr/bin/env bash
 
-# Sequential version of the compile and test script
+# Parallel version of the compile and test script
 
 set -e
 
-nValue="10"
+nValue="20"
 numberOfProcesses="4"
 
 # Loads mpi-module if on CIMS
-if [[ "$OSTYPE" == "linux-gnu" ]]; then
+if [[ "$(uname -s)" == "Linux" ]]; then
 	module load openmpi-x86_64
 fi
 
 # Compiles
-if [[ "$OSTYPE" == "darwin15" ]]; then
-    clang-omp -fopenmp -g -Wall -o genprime genprime.c -std=c99
+if [[ "$(uname -s)" == "Darwin" ]]; then
+#    clang-omp -fopenmp -g -Wall -o genprime genprime.c -std=c99
+	clang-omp -fopenmp -g -Wall -o genprime genprime.c
 else
-	gcc -fopenmp -g -Wall -o genprime genprime.c -std=c99
+#	gcc -fopenmp -g -Wall -o genprime genprime.c -std=c99
+	gcc -fopenmp -g -Wall -o genprime genprime.c
 fi
 
 # Executes and generates the output file
 ./genprime $nValue $numberOfProcesses
 
-cat $nValue.txt
+# Diffs the parallel version
+diff $nValue.txt testing/answer/$nValue.txt
