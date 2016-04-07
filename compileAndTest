@@ -5,7 +5,7 @@
 set -e
 
 nValue="20"
-numberOfProcesses="4"
+numberOfThreads="4"
 
 # Loads mpi-module if on CIMS
 if [[ "$(uname -s)" == "Linux" ]]; then
@@ -14,15 +14,13 @@ fi
 
 # Compiles
 if [[ "$(uname -s)" == "Darwin" ]]; then
-#    clang-omp -fopenmp -g -Wall -o genprime genprime.c -std=c99
 	clang-omp -fopenmp -g -Wall -o genprime genprime.c
 else
-#	gcc -fopenmp -g -Wall -o genprime genprime.c -std=c99
 	gcc -fopenmp -g -Wall -o genprime genprime.c
 fi
 
 # Executes and generates the output file
-./genprime $nValue $numberOfProcesses
+./genprime $nValue $numberOfThreads
 
 # Diffs the parallel version
 diff $nValue.txt testing/answer/$nValue.txt
