@@ -37,8 +37,9 @@ void testAll();
  **********************/
 void testFullValues()
 {
+    int i;
     printf("The fullValues[i] matrix:\n");
-    for (int i = 0; i < N; ++i)
+    for (i = 0; i < N; ++i)
         printf("%d ", fullValues[i]);
     printf("\n");
     printf("---------------------------------------------\n");
@@ -46,8 +47,9 @@ void testFullValues()
 
 void testPrimeValues()
 {
+    int i;
     printf("The primeValues[i] matrix:\n");
-    for (int i = 0; i < N; ++i)
+    for (i = 0; i < N; ++i)
         printf("%d ", primeValues[i]);
     printf("\n");
     printf("---------------------------------------------\n");
@@ -55,8 +57,9 @@ void testPrimeValues()
 
 void testIsPrime()
 {
+    int i;
     printf("The isPrime[i] matrix:\n");
-    for (int i = 0; i < N; ++i)
+    for (i = 0; i < N; ++i)
     {
         if (isPrime[i])
             printf("Y ");
@@ -79,7 +82,8 @@ void testAll()
  */
 void sequential()
 {
-    for (int current = 2; current < N; ++current)
+    int current;
+    for (current = 2; current < N; ++current)
     {
         if (isPrime[current])
         {
@@ -106,7 +110,8 @@ void sequential()
  */
 void parallel(int numberOfThreads)
 {
-    for (int current = 2; current < N; ++current)
+    int current;
+    for (current = 2; current < N; ++current)
     {
         if (isPrime[current])
         {
@@ -147,7 +152,8 @@ int initialise(char *argv[])
         exit(1);
     }
 
-    for (int i = 0; i < N; ++i)
+    int i;
+    for (i = 0; i < N; ++i)
         fullValues[i] = i;
 
     // Deals with isPrime
@@ -158,8 +164,9 @@ int initialise(char *argv[])
         exit(1);
     }
 
-    for (int i = 0; i < N; ++i)
-        isPrime[i] = true;
+    int j;
+    for (j = 0; j < N; ++j)
+        isPrime[j] = true;
 
     // Deals with primeValues
     int floor = ((N + 1) / 2) + 1; // We add one to the floor to keep rank consistent, and simply don't use primeVal[0]
@@ -186,7 +193,8 @@ void output(char* outputFile)
         exit(-1); // must include stdlib.h
     }
 
-    for (int i = 1; i < primeValuesSize; ++i)
+    int i;
+    for (i = 1; i < primeValuesSize; ++i)
         fprintf(out, "%d %d %d\n", i, primeValues[i], primeValues[i] - primeValues[i - 1]); // write to file
     fclose(out);
 } // End of the output function
