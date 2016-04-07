@@ -16,19 +16,21 @@ Both parallel and sequential versions of this code are provided in the source, a
 ## Compilation & Running
 ### To compile the code and test against an input automatically
 To change the input, simply change `nValue="10"` to whatever `N` value you would like to serve as the upper bound.
+To change the number of threads that the program runs with, simply change `numberOfProcesses="4"` to the number of desired threads
+
 ```sh
 ./compileAndTest
 ```
 
 ### To compile and run the code manually
 ```sh
-gcc -g -Wall -o -std=c99 <output_file_name> <source_file_name>
+gcc -g -Wall -o <output_file_name> <source_file_name>
 ./<output_file_name> <N_value_upper_bound> <number_of_threads>
 ```
 
 e.g. To compile and find prime numbers up to 100 with 10 threads
 ```sh
-gcc -g -Wall -o -std=c99 genprime genprime.c
+gcc -g -Wall -o genprime genprime.c
 ./genprime 100 10
 ```
 
@@ -42,8 +44,15 @@ and link the libraries required for the source code to run.
 
 - `-o` is to signify the output binary
 
+## The output
+The output will be an ordered list, such that each line contains 3 integers `a`, `b`, `c`, where:
+
+- `a` is the rank of the prime
+- `b` is the value of the prime
+- `c` is the difference from the current prime (`b`), and the prior prime
+
 ## Debugging version
-If you'd like to run the debugging version of the code irrespective of the other flags, please edit the source file [gs.c](gs.c) and change line **12** from
+If you'd like to run the debugging version of the code irrespective of the other flags, please edit the source file [gs.c](gs.c) and change line **11** from
 
 ```sh
 bool IS_DEBUG_MODE = false;
@@ -55,7 +64,7 @@ bool IS_DEBUG_MODE = true;
 then compile again before running
 
 ## Sequential version
-If you'd like to run the sequential version of the code instead, please edit the source file [gs.c](gs.c) and change line **13** from
+If you'd like to run the sequential version of the code instead, please edit the source file [gs.c](gs.c) and change line **12** from
 
 ```sh
 bool IS_SEQUENTIAL_MODE = false;
@@ -67,7 +76,7 @@ bool IS_SEQUENTIAL_MODE = true;
 then compile again before running
 
 ## Timed version
-If you'd like to run the timed version of this code, irrespective of the other flags, please edit the source file [gs.c](gs.c) and change line **14** from
+If you'd like to run the timed version of this code, irrespective of the other flags, please edit the source file [gs.c](gs.c) and change line **13** from
 
 ```sh
 bool IS_TIMED_MODE = false;
