@@ -120,7 +120,7 @@ void parallel(int numberOfThreads)
             # pragma omp parallel num_threads(numberOfThreads)
             {
                 int i;
-                #pragma omp for
+                #pragma omp parallel for
                 for (i = current; i < N; i += current)
                     isPrime[i] = false;
             }
