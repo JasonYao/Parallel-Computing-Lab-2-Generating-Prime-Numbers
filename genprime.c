@@ -88,7 +88,8 @@ void sequential()
         if (isPrime[current])
         {
             // Marks all multiples of this prime value as false
-            for (int i = current; i < N; i += current)
+            int i;
+            for (i = current; i < N; i += current)
                 isPrime[i] = false;
 
             primeValues[primeValuesSize] = current;
@@ -119,7 +120,8 @@ void parallel(int numberOfThreads)
             # pragma omp parallel num_threads(numberOfThreads)
             {
                 #pragma omp for
-                for (int i = current; i < N; i += current)
+                int i;
+                for (i = current; i < N; i += current)
                     isPrime[i] = false;
             }
 
