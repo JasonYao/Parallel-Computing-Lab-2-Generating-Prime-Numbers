@@ -119,8 +119,8 @@ void parallel(int numberOfThreads)
             // Marks all multiples of this prime value as false
             # pragma omp parallel num_threads(numberOfThreads)
             {
-                #pragma omp for
                 int i;
+                #pragma omp for
                 for (i = current; i < N; i += current)
                     isPrime[i] = false;
             }
