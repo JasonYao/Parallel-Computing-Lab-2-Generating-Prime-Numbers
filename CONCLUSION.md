@@ -58,11 +58,12 @@ From this definition, the following performance graphs were derived from the ful
 
 ## The "Why" for the speedup graphs
 As we can see per the trendline in the speedup graphs, there is an exponential decrease in 
-speedup as the number of threads increases. This could be attributed to a poor algorithmic 
-choice, as the current algorithm to generate primes is very constrained 
-(a majour portion of the algorithm is sequential, since isPrime[] relies on prior calculated data).
+speedup as the number of threads increases. This could be attributed to the fact that as the
+number of threads increase, the amount of work per thread is decreased. Combine this fact with
+the performance cost of `fork()`ing and `join()`ing threads, and we can see that overhead 
+increases as the number of threads increase.
 
 Another thing to note from the speedup graphs is that as the value of `N` increases, generally 
-speaking there is a noticeable increase in the speedup. This could be attributed to the fact that
-since each thread has more data to work on, there is less need to fork() and join() during the parallel
-sections.
+speaking there is a noticeable decrease in the speedup. This could be attributed to the fact that
+since each thread has more data to work on, it requires more time to process during each parallel
+section.
