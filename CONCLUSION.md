@@ -1,4 +1,5 @@
 # Project Conclusions
+By Jason Yao
 
 ## The graphs
 ### Speedup
