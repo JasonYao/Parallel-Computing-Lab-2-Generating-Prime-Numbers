@@ -1,9 +1,6 @@
 #include <time.h>
 #include <stdio.h>
 #include <stdlib.h>
-//TODO The following two lines are required for sanity when using the cLion IDE, kill them off before submission
-#pragma clang diagnostic push
-#pragma ide diagnostic ignored "CannotResolve"
 #include <omp.h>
 #include <string.h>
 
@@ -259,5 +256,3 @@ int main(int argc, char *argv[])
     cleanup(outputFile);
     return EXIT_SUCCESS;
 } // End of the main function
-
-#pragma clang diagnostic pop
